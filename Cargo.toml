@@ -1,0 +1,17 @@
+[package]
+name = "secure_chunker"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+eframe = "0.29"
+rfd = "0.15"
+tar = "0.4"
+zstd = "0.13"
+aes-gcm = "0.10"
+argon2 = "0.5"
+rand = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+hex = "0.4"
