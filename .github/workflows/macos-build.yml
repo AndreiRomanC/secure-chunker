@@ -1,0 +1,61 @@
+name: Build macOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-macos-apple-silicon:
+    name: macOS Apple Silicon (arm64)
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build release executable
+        run: cargo build --release
+
+      - name: Package executable
+        run: |
+          mkdir -p dist
+          cp target/release/secure_chunker dist/secure_chunker
+          tar -czf secure_chunker-macos-arm64.tar.gz -C dist secure_chunker
+
+      - name: Upload macOS Apple Silicon executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: secure_chunker-macos-arm64
+          path: secure_chunker-macos-arm64.tar.gz
+          if-no-files-found: error
+
+  build-macos-intel:
+    name: macOS Intel (x64)
+    runs-on: macos-15-intel
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build release executable
+        run: cargo build --release
+
+      - name: Package executable
+        run: |
+          mkdir -p dist
+          cp target/release/secure_chunker dist/secure_chunker
+          tar -czf secure_chunker-macos-intel-x64.tar.gz -C dist secure_chunker
+
+      - name: Upload macOS Intel executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: secure_chunker-macos-intel-x64
+          path: secure_chunker-macos-intel-x64.tar.gz
+          if-no-files-found: error

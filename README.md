@@ -29,3 +29,18 @@ This repository includes `.github/workflows/windows-build.yml`.
 7. Inside the downloaded artifact you will find `secure_chunker.exe`.
 
 The executable is built natively on GitHub's Windows runner in release mode.
+
+## GitHub Actions builds
+
+The repository contains workflows for native Windows and macOS builds.
+
+### Windows
+Run **Build Windows EXE** from the Actions tab. Download the `secure_chunker-windows-x64` artifact; it contains `secure_chunker.exe`.
+
+### macOS
+Run **Build macOS** from the Actions tab. It builds two native variants:
+
+- `secure_chunker-macos-arm64` — Apple Silicon Macs (M1/M2/M3/M4 and newer ARM Macs)
+- `secure_chunker-macos-intel-x64` — Intel Macs
+
+Each artifact contains a `.tar.gz` archive. Extract it to get the `secure_chunker` executable. macOS may block an unsigned app on first launch; if so, Control-click the executable and choose **Open**, or allow it in **System Settings → Privacy & Security**.
